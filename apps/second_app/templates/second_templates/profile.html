@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ friend.alias }}</title>
+</head>
+
+<body>
+    <a href="/second_app/success">Home</a>
+    <a href="/lr_app/logout">Log Out</a>
+    <h3>{{this_friend.future_friend.alias}}'s Profile</h3>
+    
+    <p>Name: {{this_friend.requester.name}}</p>
+    <p>Email Address: {{this_friend.requester.email}}</p>
+    
+
+    <!-- <h3>{{friend.alias}}'s Profile</h3>
+    {% for x in friends_profile %}
+    <p>Name: {{x.name}}</p>
+    <p>Email Address: {{x.email}}</p>
+    {% endfor %} -->
+    
+</body>
+
+</html>

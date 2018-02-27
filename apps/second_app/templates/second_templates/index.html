@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friends</title>
+</head>
+
+<body>
+    <h1>Hello, {{ current_user }}! </h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <a href="/lr_app/logout">Log Out</a>
+    <table>
+        <h3>Here is a list of your friends:</h3>
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for f in my_friends %}
+        <tr>
+            <td>{{ f.future_friend.alias }}</td>
+            <td>
+                <a href='/second_app/profile/{{f.id}}'>View Profile</a>
+                <a href='/second_app/remove/{{f.id}}'>Remove as Friend</a>
+            </td>
+            
+        </tr>
+        {% endfor %} {% for f in my_adds %}
+        <tr>
+            <td>{{ f.future_friend.alias }}</td>
+            <td>
+                <a href='/second_app/profile/{{f.id}}'>View Profile</a>
+                <a href='/second_app/remove/{{f.id}}'>Remove as Friend</a>
+            </td>
+        </tr>
+        {% endfor %} {% for f in friend_adds %}
+        <tr>
+            <td>{{ f.requester.alias }}</td>
+            <td>
+                <a href='/second_app/profile/{{f.id}}'>View Profile</a>
+                <a href='/second_app/remove/{{f.id}}'>Remove as Friend</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <table>
+        <h3>Other Users not on your friends list:</h3>
+        <thead>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for u in all_users %}
+        <tr>
+            <td><a href='/second_app/profile/{{u.id}}'>{{ u.alias }}</a></td>
+            <td>
+                <form action="/second_app/addFriend" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="future_friend" value="{{ u.id }}">
+                    <input type="submit" value="Add as Friend">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
